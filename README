@@ -36,4 +36,5 @@ TODO:
     - Introduce resize strategies (crop, stretch, pad, scale).
     - Allow limited overrides with CGI parameters (e.g. padding color).
     - Allow configurable path parsing.
+    - Web proxying - so it can grab images from other websites (for S3, for example).
     - Get it to ignore/prevent favicon.ico requests!!
