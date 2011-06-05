@@ -20,7 +20,7 @@ Setup the server by editing the config file. The root directory is where your
 images live and all requests made to the server are relative to that.
 
 To run:
-    $ node resizo.js
+    $ node roosize.js
 
 The server takes a path prefixed with a size. For example, if I want to access
 the file "/shared/something/people/bob.jpg" I might set the config rootDirectory
