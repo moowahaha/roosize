@@ -27,4 +27,11 @@ the file "/shared/something/people/bob.jpg" I might set the config rootDirectory
 to "/shared/something/". When I run the server, the browser will request different
 sizes by asking for "www.yourserver.com/800x600/people/bob.jpg".
 
-
+TODO:
+    - Totally rewrite to be safe for production use.
+    - Limit request sizes.
+    - Limit server memoray usage incase of DOS attack.
+    - Introduce resize strategies.
+    - Allow limited overrides with CGI parameters.
+    - Allow configurable path parsing.
+    - Get it totally ignore favicon.ico requests!!
