@@ -1,0 +1,30 @@
+ALPHA! NOT READY FOR PRODUCTION USE!!!
+
+An image resize system written for NodeJS.
+
+It's a straight replacement for my apache_image_resizer
+(https://github.com/moowahaha/apache_image_resizer) except probably faster.
+
+This is just an experiment as a learning exercise and not a finished product.
+I intend to rewrite this with tests and more resize options.
+
+Requires...
+    - NodeJS (brew install node)
+    - Some packages. Run ./setup.sh .
+
+Probably good to have the following dependencies:
+    - NVM (https://github.com/creationix/nvm/)
+    - I'm using RVM to ensure isolation (https://rvm.beginrescueend.com/)
+
+Setup the server by editing the config file. The root directory is where your
+images live and all requests made to the server are relative to that.
+
+To run:
+    $ node resizo.js
+
+The server takes a path prefixed with a size. For example, if I want to access
+the file "/shared/something/people/bob.jpg" I might set the config rootDirectory
+to "/shared/something/". When I run the server, the browser will request different
+sizes by asking for "www.yourserver.com/800x600/people/bob.jpg".
+
+
