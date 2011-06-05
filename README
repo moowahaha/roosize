@@ -13,8 +13,8 @@ Requires...
     - Some packages. Run ./setup.sh .
 
 Probably good to have the following dependencies:
-    - NVM (https://github.com/creationix/nvm/)
-    - I'm using RVM to ensure isolation (https://rvm.beginrescueend.com/)
+    - N (https://github.com/visionmedia/n)
+    - I'm using RVM to ensure the appropriate version of node is used.
 
 Setup the server by editing the config file. The root directory is where your
 images live and all requests made to the server are relative to that.

@@ -1,2 +1,2 @@
-nvm use 0.4.8
+n latest
 ./setup.sh
