@@ -1,11 +1,11 @@
 var sys = require('sys'),
-    http = require('http'),
-    url = require('url'),
-    path = require('path'),
-    fs = require('fs'),
-    gd = require('node-gd'),
-    daemon = require('daemon')
-    mime = require('mime');
+        http = require('http'),
+        url = require('url'),
+        path = require('path'),
+        fs = require('fs'),
+        gd = require('node-gd'),
+        daemon = require('daemon'),
+        mime = require('mime');
 
 var config = readConfig();
 
@@ -32,9 +32,15 @@ function readConfig() {
     return JSON.parse(configString);
 }
 
-function hexToR(h) {return parseInt(h.substring(0,2),16)}
-function hexToG(h) {return parseInt(h.substring(2,4),16)}
-function hexToB(h) {return parseInt(h.substring(4,6),16)}
+function hexToR(h) {
+    return parseInt(h.substring(0, 2), 16)
+}
+function hexToG(h) {
+    return parseInt(h.substring(2, 4), 16)
+}
+function hexToB(h) {
+    return parseInt(h.substring(4, 6), 16)
+}
 
 function parseFileRequest(url) {
     var parts = url.split('/');
@@ -65,12 +71,12 @@ function parseFileRequest(url) {
 
 function offset(calculatedLength, requestedLength) {
     return (
-        Math.round((
-            calculatedLength > requestedLength ?
-                calculatedLength - requestedLength :
-                requestedLength - calculatedLength
-        ) / 2)
-    );
+            Math.round((
+                    calculatedLength > requestedLength ?
+                            calculatedLength - requestedLength :
+                            requestedLength - calculatedLength
+                    ) / 2)
+            );
 }
 
 function processRequest(fileRequest, filename, response, config) {
@@ -79,7 +85,7 @@ function processRequest(fileRequest, filename, response, config) {
     imageFormat = imageFormat.charAt(0).toUpperCase() + imageFormat.slice(1);
 
     if (supportedImageTypes.indexOf(imageFormat) < 0) {
-        response.writeHead(406,  {'Content-Type': 'text/plain'});
+        response.writeHead(406, {'Content-Type': 'text/plain'});
         response.end("Not supported", 'binary');
         return;
     }
@@ -87,14 +93,14 @@ function processRequest(fileRequest, filename, response, config) {
     gd['open' + imageFormat](filename, function(image, path) {
         var newImage = gd.createTrueColor(fileRequest['width'], fileRequest['height']);
         newImage.fill(
-            0,
-            0,
-            newImage.colorAllocate(
-                hexToR(config['paddingColor']),
-                hexToG(config['paddingColor']),
-                hexToB(config['paddingColor'])
-            )
-        );
+                0,
+                0,
+                newImage.colorAllocate(
+                        hexToR(config['paddingColor']),
+                        hexToG(config['paddingColor']),
+                        hexToB(config['paddingColor'])
+                        )
+                );
 
         var originalRatio = image.width / image.height;
         var newRatio = fileRequest['width'] / fileRequest['height'];
@@ -110,16 +116,16 @@ function processRequest(fileRequest, filename, response, config) {
         }
 
         image.copyResampled(
-            newImage,
-            offset(newWidth, fileRequest['width']),
-            offset(newHeight, fileRequest['height']),
-            0,
-            0,
-            newWidth,
-            newHeight,
-            image.width,
-            image.height
-        );
+                newImage,
+                offset(newWidth, fileRequest['width']),
+                offset(newHeight, fileRequest['height']),
+                0,
+                0,
+                newWidth,
+                newHeight,
+                image.width,
+                image.height
+                );
 
         response.writeHead(200, {'Content-Type': mimeType});
         response.end(newImage[imageFormat.toLowerCase() + 'Ptr'](), 'binary');
@@ -127,22 +133,24 @@ function processRequest(fileRequest, filename, response, config) {
 
 }
 
-http.createServer(function(request, response) {
-    var fileRequest = parseFileRequest(url.parse(request.url).pathname);
-    var filename = fileRequest['file'];
+http.createServer(
+        function(request, response) {
+            var fileRequest = parseFileRequest(url.parse(request.url).pathname);
+            var filename = fileRequest['file'];
 
-    console.log('File requested: ' + [config['rootDirectory'], filename].join('/'));
+            console.log('File requested: ' + [config['rootDirectory'], filename].join('/'));
 
-    path.exists(filename, function(exists) {
-        if(!exists) {
-            response.writeHead(404, {'Content-Type': 'text/plain'});
-            response.end('404 Not Found\n');
-            return;
+            path.exists(filename, function(exists) {
+                if (!exists) {
+                    response.writeHead(404, {'Content-Type': 'text/plain'});
+                    response.end('404 Not Found\n');
+                    return;
+                }
+
+                processRequest(fileRequest, filename, response, config);
+            });
         }
-
-        processRequest(fileRequest, filename, response, config);
-    });
-}).listen(parseInt(config['listenPort']));
+        ).listen(parseInt(config['listenPort']));
 
 console.log('Listening on port ' + config['listenPort']);
 

@@ -1,2 +1,2 @@
-npm install node-gd daemon mime
+npm install node-gd daemon mime jasmine-node
 
