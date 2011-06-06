@@ -1,6 +1,48 @@
 {
-    "root": "/tmp",
+    "root": {
+        "type": "directory",
+        "path": "/tmp"
+    },
     "listenPort": 8080,
-    "paddingColor": "660066"
+    "requestDefaults": {
+        "paddingColor": {
+            "value": "6600AA",
+            "allowOverride": true
+        },
+        "strategy": {
+            "value": "pad",
+            "allowOverride": false
+        }
+    },
+    "limits": {
+        "range": {
+            "maximum": {
+                "width": 1600,
+                "height": 1200
+            },
+            "minimum": {
+                "width": 400,
+                "height": 300
+            }
+        },
+        "sizes": [
+            {
+                "width": 200,
+                "height": 400
+            },
+            {
+                "width": 640,
+                "height": 480
+            },
+            {
+                "width": 800,
+                "height": 600
+            },
+            {
+                "width": 3200,
+                "height": 2400
+            }
+        ]
+    }
 }
 
