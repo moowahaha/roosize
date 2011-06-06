@@ -28,6 +28,7 @@ to "/shared/something/". When I run the server, the browser will request differe
 sizes by asking for "www.yourserver.com/800x600/people/bob.jpg".
 
 TODO:
+    - Skip resizing images that are already of the correct size...
     - Totally rewrite to be safe for production use.
     - Limit request sizes.
     - Some basic time based caching.
