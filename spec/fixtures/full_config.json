@@ -1,6 +1,6 @@
 {
-    "root": {
-        "type": "directory",
+    "imageSource": {
+        "type": "filesystem",
         "path": "/tmp"
     },
     "listenPort": 8080,

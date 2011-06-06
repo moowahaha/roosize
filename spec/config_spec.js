@@ -11,23 +11,23 @@ describe('Configuration', function () {
         expect(_config.listenPort).toEqual(8080);
     });
 
-    describe('root', function () {
+    describe('imageSource', function () {
         it('should have a path', function () {
-            expect(_config.root.path).toEqual('/tmp');
+            expect(_config.imageSource.path).toEqual('/tmp');
         });
 
         it('should have a type', function () {
-            expect(_config.root.type).toEqual('directory');
+            expect(_config.imageSource.type).toEqual('filesystem');
         });
     });
 
     describe('requestDefaults', function() {
-        it('should have paddingColor default', function () {
+        it('should have paddingColor', function () {
             expect(_config.requestDefault('paddingcolor').allowOverride).toEqual(true);
             expect(_config.requestDefault('paddingcolor').value).toEqual('6600AA');
         });
 
-        it('should have resize strategy default', function () {
+        it('should have resize strategy', function () {
             expect(_config.requestDefault('Strategy').allowOverride).toEqual(false);
             expect(_config.requestDefault('strategY').value).toEqual('pad');
         });
@@ -62,7 +62,7 @@ describe('Configuration', function () {
                 allowed: false
             }
         ].forEach(function (expectation) {
-            it("should" + expectation['allowed'] ? ' ' : ' not ' + "allow " + expectation['width'] + 'x' + expectation['height'], function() {
+            it('should' + expectation['allowed'] ? ' ' : ' not ' + 'allow ' + expectation['width'] + 'x' + expectation['height'], function() {
                 expect(_config.sizeWithinLimit(
                     expectation['width'],
                     expectation['height']
