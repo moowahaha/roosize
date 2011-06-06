@@ -7,6 +7,8 @@ var sys = require('sys'),
         daemon = require('daemon'),
         mime = require('mime');
 
+http.Agent.defaultMaxSockets = 20;
+
 var config = readConfig();
 
 config['paddingColor'] = config['paddingColor'].toUpperCase();
