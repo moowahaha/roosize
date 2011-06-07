@@ -23,12 +23,12 @@ describe('Configuration', function () {
 
     describe('requestDefaults', function() {
         it('should have paddingColor', function () {
-            expect(_config.requestDefault('paddingcolor').allowOverride).toEqual(true);
+            expect(_config.requestDefault('paddingcolor').allowOverride).toBeTruthy();
             expect(_config.requestDefault('paddingcolor').value).toEqual('6600AA');
         });
 
         it('should have resize strategy', function () {
-            expect(_config.requestDefault('Strategy').allowOverride).toEqual(false);
+            expect(_config.requestDefault('Strategy').allowOverride).toBeFalsy();
             expect(_config.requestDefault('strategY').value).toEqual('pad');
         });
     });
