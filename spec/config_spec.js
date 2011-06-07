@@ -27,7 +27,7 @@ describe('Configuration', function () {
 
     describe('imageSource', function () {
         it('should have a path', function () {
-            expect(_config.imageSource.path).toEqual('/tmp');
+            expect(_config.imageSource.path).toEqual('./spec/fixtures');
         });
 
         it('should have a type', function () {
