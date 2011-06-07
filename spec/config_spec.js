@@ -11,6 +11,20 @@ describe('Configuration', function () {
         expect(_config.listenPort).toEqual(8080);
     });
 
+    it('should have a connectionLimit', function () {
+        expect(_config.connectionLimit).toEqual(200);
+    });
+
+    describe('cacheControl', function () {
+        it('should have an inboundTTL', function () {
+            expect(_config.cacheControl.inboundTTL).toEqual(5);
+        });
+
+        it('should have an outboundTTL', function () {
+            expect(_config.cacheControl.outboundTTL).toEqual(3600);
+        });
+    });
+
     describe('imageSource', function () {
         it('should have a path', function () {
             expect(_config.imageSource.path).toEqual('/tmp');

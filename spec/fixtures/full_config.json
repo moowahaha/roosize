@@ -4,6 +4,11 @@
         "path": "/tmp"
     },
     "listenPort": 8080,
+    "connectionLimit": 200,
+    "cacheControl": {
+        "inboundTTL": 5,
+        "outboundTTL": 3600
+    },
     "requestDefaults": {
         "paddingColor": {
             "value": "6600AA",
