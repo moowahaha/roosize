@@ -1,5 +1,6 @@
 var ImageFile = require('image_file').ImageFile,
-        Configuration = require('config').Configuration;
+        Configuration = require('config').Configuration,
+        fs = require('fs');
 
 describe('Server', function () {
     var _imageFile;
@@ -10,7 +11,18 @@ describe('Server', function () {
     });
 
     it('should have a modified time', function () {
-        // very fragile test!
-        expect(_imageFile.modified).toEqual(new Date('Tue Jun 07 2011 20:35:15 GMT+1000 (EST)'));
+        var modified = fs.statSync('./spec/fixtures/images/bob.jpg')['mtime'];
+        expect(modified).toBeLessThan(new Date);
+        expect(_imageFile.modified).toEqual(modified);
+    });
+
+    describe('file format', function () {
+        it('should have a stringified type', function () {
+            expect(_imageFile.type).toEqual('jpeg');
+        });
+
+        it('should have a mime type', function () {
+            expect(_imageFile.mimeType).toEqual('image/jpeg');
+        });
     });
 });
