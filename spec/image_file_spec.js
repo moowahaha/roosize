@@ -25,4 +25,9 @@ describe('Server', function () {
             expect(_imageFile.mimeType).toEqual('image/jpeg');
         });
     });
+
+    it('should have some image data', function () {
+        expect(_imageFile.data.width).toEqual(450);
+        expect(_imageFile.data.height).toEqual(348);
+    });
 });
