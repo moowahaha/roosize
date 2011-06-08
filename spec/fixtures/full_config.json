@@ -15,8 +15,8 @@
             "allowOverride": true
         },
         "strategy": {
-            "value": "pad",
-            "allowOverride": false
+            "value": "stretch",
+            "allowOverride": true
         }
     },
     "limits": {

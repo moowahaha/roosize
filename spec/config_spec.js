@@ -42,8 +42,8 @@ describe('Configuration', function () {
         });
 
         it('should have resize strategy', function () {
-            expect(_config.requestDefault('Strategy').allowOverride).toBeFalsy();
-            expect(_config.requestDefault('strategY').value).toEqual('pad');
+            expect(_config.requestDefault('Strategy').allowOverride).toBeTruthy();
+            expect(_config.requestDefault('strategY').value).toEqual('stretch');
         });
     });
 
@@ -78,11 +78,51 @@ describe('Configuration', function () {
         ].forEach(function (expectation) {
             it('should' + expectation['allowed'] ? ' ' : ' not ' + 'allow ' + expectation['width'] + 'x' + expectation['height'], function() {
                 expect(_config.sizeWithinLimit(
-                    expectation['width'],
-                    expectation['height']
-                )).toEqual(expectation['allowed']);
+                        expectation['width'],
+                        expectation['height']
+                        )).toEqual(expectation['allowed']);
             });
         });
 
     });
+});
+
+describe('default configuration', function () {
+    var _config;
+
+    beforeEach(function () {
+        _config = new Configuration('./spec/fixtures/minimal_config.json');
+    });
+
+    it('should have a connectionLimit', function () {
+        expect(_config.connectionLimit).toEqual(5);
+    });
+
+    describe('cacheControl', function () {
+        it('should have an inboundTTL', function () {
+            expect(_config.cacheControl.inboundTTL).toEqual(0);
+        });
+
+        it('should have an outboundTTL', function () {
+            expect(_config.cacheControl.outboundTTL).toEqual(0);
+        });
+    });
+
+    describe('requestDefaults', function() {
+        it('should have paddingColor', function () {
+            expect(_config.requestDefault('paddingcolor').allowOverride).toBeFalsy();
+            expect(_config.requestDefault('paddingcolor').value).toEqual('FFFFFF');
+        });
+
+        it('should have resize strategy', function () {
+            expect(_config.requestDefault('Strategy').allowOverride).toBeFalsy();
+            expect(_config.requestDefault('strategY').value).toEqual('pad');
+        });
+    });
+
+
+    it('should accept any requested size', function() {
+        expect(_config.sizeWithinLimit(123456, 987654)).toBeTruthy();
+    });
+
 });
