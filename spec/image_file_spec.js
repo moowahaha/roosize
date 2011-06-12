@@ -2,7 +2,7 @@ var ImageFile = require('image_file').ImageFile,
         Configuration = require('config').Configuration,
         fs = require('fs');
 
-describe('Server', function () {
+describe('ImageFile', function () {
     var _imageFile;
 
     beforeEach(function () {
