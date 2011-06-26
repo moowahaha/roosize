@@ -1,7 +1,7 @@
 {
   "imageSource": {
     "type": "filesystem",
-    "path": "./spec/fixtures"
+    "path": "./test/fixtures"
   },
   "listenPort": 8080,
   "connectionLimit": 200,

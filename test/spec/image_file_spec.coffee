@@ -5,11 +5,11 @@ fs = require 'fs'
 describe 'ImageFile', ->
   _imageFile = null
   beforeEach ->
-    _imageFile = new ImageFile(new Configuration('./spec/fixtures/full_config.json'))
+    _imageFile = new ImageFile(new Configuration('./test/fixtures/full_config.json'))
     _imageFile.open 'images/bob.jpg'
 
   it 'should have a modified time', ->
-    modified = fs.statSync('./spec/fixtures/images/bob.jpg').mtime
+    modified = fs.statSync('./test/fixtures/images/bob.jpg').mtime
     expect(modified).toBeLessThan(new Date)
     expect(_imageFile.modified).toEqual(modified)
 

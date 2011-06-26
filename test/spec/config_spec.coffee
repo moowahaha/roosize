@@ -4,7 +4,7 @@ describe 'Configuration', ->
   _config = null
 
   beforeEach ->
-    _config = new Configuration('./spec/fixtures/full_config.json')
+    _config = new Configuration('./test/fixtures/full_config.json')
 
   it 'should have a listenPort', ->
     expect(_config.listenPort).toEqual(8080)
@@ -21,7 +21,7 @@ describe 'Configuration', ->
 
   describe 'imageSource', ->
     it 'should have a path', ->
-      expect(_config.imageSource.path).toEqual('./spec/fixtures')
+      expect(_config.imageSource.path).toEqual('./test/fixtures')
 
     it 'should have a type', ->
       expect(_config.imageSource.type).toEqual('filesystem')
@@ -76,7 +76,7 @@ describe 'default configuration', ->
   _config = null
 
   beforeEach ->
-    _config = new Configuration './spec/fixtures/minimal_config.json'
+    _config = new Configuration './test/fixtures/minimal_config.json'
 
   it 'should have a connectionLimit', ->
     expect(_config.connectionLimit).toEqual(5)

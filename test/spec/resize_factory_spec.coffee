@@ -9,7 +9,7 @@ describe 'ResizeFactory', ->
 
     beforeEach ->
       _url = url.parse('/something/something?strategy=' + strategy, true)
-      _config = new Configuration('./spec/fixtures/full_config.json')
+      _config = new Configuration('./test/fixtures/full_config.json')
 
     it 'should ' + strategy + ' our image', ->
       resizeFactory = new ResizeFactory(_config, _url)
@@ -17,7 +17,7 @@ describe 'ResizeFactory', ->
 
   it 'should use the default strategy', ->
     resizeFactory = new ResizeFactory(
-        new Configuration('./spec/fixtures/minimal_config.json'),
+        new Configuration('./test/fixtures/minimal_config.json'),
         url.parse('/something/something', true)
     )
 
@@ -28,7 +28,7 @@ describe 'ResizeFactory', ->
 
     try
       new ResizeFactory(
-        new Configuration('./spec/fixtures/minimal_config.json'),
+        new Configuration('./test/fixtures/minimal_config.json'),
         url.parse('/something/something?strategy=stretch', true)
       )
 
@@ -40,12 +40,12 @@ describe 'ResizeFactory', ->
     finally
       expect(errorThrown).toBeTruthy()
 
-  it 'should throw en exception when requesting unknown strategy', ->
+  it 'should throw an exception when requesting unknown strategy', ->
     errorThrown = false
 
     try
       new ResizeFactory(
-          new Configuration('./spec/fixtures/full_config.json'),
+          new Configuration('./test/fixtures/full_config.json'),
           url.parse('/something/something?strategy=something', true)
           )
 
