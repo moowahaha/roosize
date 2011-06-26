@@ -12,27 +12,27 @@
 #        var data = '';
 #        request.end();
 #        request.on('response', function(response) {
-#            console.log('aaaaaaaaaaaa');
-#            response.addListener('data', function(chunk) {
-#                data += chunk;
-#            });
-#        });
-#        console.log(data);
+#      console.log('aaaaaaaaaaaa');
+#      response.addListener('data', function(chunk) {
+#        data += chunk;
+#      });
 #    });
+#    console.log(data);
+#  });
 #
-#    afterEach(function () {
-#        roosize.kill('SIGHUP');
-#    });
+#  afterEach(function () {
+#    roosize.kill('SIGHUP');
+#  });
 #
-#    it('should blah', function () {
-#        expect(true).toEqual(false);
-#    });
+#  it('should blah', function () {
+#    expect(true).toEqual(false);
+#  });
 #});
 #
 #
-#var http = require('http');
-#var google = http.createClient(80, 'www.google.com');
-#var request = google.request('GET', '/',
+#http = require('http')
+#google = http.createClient(8080, 'localhost')
+#request = google.request('GET', '/',
 #  {'host': 'www.google.com'});
 #request.end();
 #request.on('response', function (response) {
@@ -40,6 +40,6 @@
 #  console.log('HEADERS: ' + JSON.stringify(response.headers));
 #  response.setEncoding('utf8');
 #  response.on('data', function (chunk) {
-#    console.log('BODY: ' + chunk);
+#  console.log('BODY: ' + chunk);
 #  });
 #});

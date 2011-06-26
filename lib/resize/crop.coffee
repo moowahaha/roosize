@@ -1,2 +1,2 @@
 exports.ResizeCrop = ->
-    name: 'crop'
+  name: 'crop'

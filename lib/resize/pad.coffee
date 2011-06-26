@@ -1,2 +1,2 @@
 exports.ResizePad = ->
-    name: 'pad'
+  name: 'pad'

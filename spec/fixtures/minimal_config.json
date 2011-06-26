@@ -1,8 +1,8 @@
 {
-    "imageSource": {
-        "type": "filesystem",
-        "path": "./spec/fixtures"
-    },
-    "listenPort": 8080
+  "imageSource": {
+    "type": "filesystem",
+    "path": "./spec/fixtures"
+  },
+  "listenPort": 8080
 }
 

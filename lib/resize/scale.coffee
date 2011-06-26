@@ -1,2 +1,2 @@
 exports.ResizeScale = ->
-    name: 'scale'
+  name: 'scale'

@@ -1,2 +1,2 @@
 exports.ResizeStretch = ->
-    name: 'stretch'
+  name: 'stretch'
