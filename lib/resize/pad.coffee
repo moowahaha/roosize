@@ -1,2 +1,2 @@
 exports.ResizePad = ->
-    this.name = 'pad'
+    name: 'pad'

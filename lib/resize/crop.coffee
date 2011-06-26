@@ -1,2 +1,2 @@
 exports.ResizeCrop = ->
-    this.name = 'crop'
+    name: 'crop'

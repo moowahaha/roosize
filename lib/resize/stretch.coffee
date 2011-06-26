@@ -1,2 +1,2 @@
 exports.ResizeStretch = ->
-    this.name = 'stretch'
+    name: 'stretch'
