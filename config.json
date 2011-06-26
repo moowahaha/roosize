@@ -1,5 +1,5 @@
 {
-  "rootDirectory": "/tmp",
+  "rootDirectory": "./test/fixtures/images",
   "listenPort": 8080,
   "paddingColor": "660066"
 }
