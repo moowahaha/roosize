@@ -1,6 +1,15 @@
 desc "Setup and install dependencies"
 task :setup do
-  sh "npm install node-gd daemon mime jasmine-node coffee-script"
+  
+  NODE_DEPENDENCIES = %w{
+    node-gd
+    daemon
+    mime
+    jasmine-node
+    coffee-script
+  }
+
+  sh "npm install #{NODE_DEPENDENCIES.join(' ')}"
 end
 
 namespace :test do
