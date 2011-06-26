@@ -9,7 +9,7 @@ exports.ResizeFactory = (configuration, url) ->
         paddingcolor: configuration.requestDefault('paddingColor').value
         strategy: configuration.requestDefault('strategy').value
 
-    Object.keys(url.query).forEach((key) ->
+    Object.keys(url.query).forEach (key) ->
         key = key.toLowerCase()
 
         return if (!params[key])
@@ -21,13 +21,13 @@ exports.ResizeFactory = (configuration, url) ->
             }
             
         params[key] = url.query[key]
-    )
 
-    if (!ResizeStrategies[params.strategy])
+    if !ResizeStrategies[params.strategy]
         throw {
             name: 'EPERM'
             message: 'Unknown strategy ' + params.strategy
         }
 
     this.instance = new ResizeStrategies[params.strategy]
+    
     return

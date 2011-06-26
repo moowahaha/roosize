@@ -1,21 +1,19 @@
 ImageFile = require('image_file').ImageFile
 Configuration = require('config').Configuration
-fs = require('fs')
+fs = require 'fs'
 
-describe('ImageFile', ->
+describe 'ImageFile', ->
     _imageFile = null
-    beforeEach(->
+    beforeEach ->
         _imageFile = new ImageFile(new Configuration('./spec/fixtures/full_config.json'))
-        _imageFile.open('images/bob.jpg')
-    )
+        _imageFile.open 'images/bob.jpg'
 
-    it('should have a modified time', ->
+    it 'should have a modified time', ->
         modified = fs.statSync('./spec/fixtures/images/bob.jpg').mtime
         expect(modified).toBeLessThan(new Date)
         expect(_imageFile.modified).toEqual(modified)
-    )
 
-    describe('file format', ->
+    describe 'file format', ->
         it('should have a stringified type', ->
             expect(_imageFile.type).toEqual('jpeg')
         )
@@ -23,10 +21,7 @@ describe('ImageFile', ->
         it('should have a mime type', ->
             expect(_imageFile.mimeType).toEqual('image/jpeg');
         )
-    )
 
-    it('should have some image data', ->
+    it 'should have some image data', ->
         expect(_imageFile.data.width).toEqual(450)
         expect(_imageFile.data.height).toEqual(348)
-    )
-)

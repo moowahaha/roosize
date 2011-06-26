@@ -1,33 +1,29 @@
 Configuration = require('config').Configuration
-url = require('url')
+url = require 'url'
 ResizeFactory = require('resize_factory').ResizeFactory
 
-describe('ResizeFactory', ->
-    ['pad', 'stretch', 'scale', 'crop'].forEach((strategy) ->
+describe 'ResizeFactory', ->
+    ['pad', 'stretch', 'scale', 'crop'].forEach (strategy) ->
         _config = null
         _url = null
 
-        beforeEach(->
+        beforeEach ->
             _url = url.parse('/something/something?strategy=' + strategy, true)
             _config = new Configuration('./spec/fixtures/full_config.json')
-        )
 
-        it('should ' + strategy + ' our image', ->
+        it 'should ' + strategy + ' our image', ->
             resizeFactory = new ResizeFactory(_config, _url)
             expect(resizeFactory.instance.name).toEqual(strategy)
-        )
-    )
 
-    it('should use the default strategy', ->
+    it 'should use the default strategy', ->
         resizeFactory = new ResizeFactory(
                 new Configuration('./spec/fixtures/minimal_config.json'),
                 url.parse('/something/something', true)
         )
 
         expect(resizeFactory.instance.name).toEqual('pad')
-    )
 
-    it('should throw an exception when we try to override the strategy and we are not allowed', ->
+    it 'should throw an exception when we try to override the strategy and we are not allowed', ->
         errorThrown = false
 
         try
@@ -43,9 +39,8 @@ describe('ResizeFactory', ->
                 throw err
         finally
             expect(errorThrown).toBeTruthy()
-    )
 
-    it('should throw en exception when requesting unknown strategy', ->
+    it 'should throw en exception when requesting unknown strategy', ->
         errorThrown = false
 
         try
@@ -61,5 +56,3 @@ describe('ResizeFactory', ->
                 throw err
         finally
             expect(errorThrown).toBeTruthy();
-    )
-)

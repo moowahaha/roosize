@@ -1,53 +1,41 @@
 Configuration = require('config').Configuration
 
-describe('Configuration', ->
+describe 'Configuration', ->
     _config = null
 
-    beforeEach(->
+    beforeEach ->
         _config = new Configuration('./spec/fixtures/full_config.json')
-    )
 
-    it('should have a listenPort', ->
+    it 'should have a listenPort', ->
         expect(_config.listenPort).toEqual(8080)
-    )
 
-    it('should have a connectionLimit', ->
+    it 'should have a connectionLimit', ->
         expect(_config.connectionLimit).toEqual(200)
-    )
 
-    describe('cacheControl', ->
-        it('should have an inboundTTL', ->
+    describe 'cacheControl', ->
+        it 'should have an inboundTTL', ->
             expect(_config.cacheControl.inboundTTL).toEqual(5);
-        )
 
-        it('should have an outboundTTL', ->
+        it 'should have an outboundTTL', ->
             expect(_config.cacheControl.outboundTTL).toEqual(3600);
-        )
-    )
 
-    describe('imageSource', ->
-        it('should have a path', ->
+    describe 'imageSource', ->
+        it 'should have a path', ->
             expect(_config.imageSource.path).toEqual('./spec/fixtures')
-        )
 
-        it('should have a type', ->
+        it 'should have a type', ->
             expect(_config.imageSource.type).toEqual('filesystem')
-        )
-    )
 
-    describe('requestDefaults', ->
-        it('should have paddingColor', ->
+    describe 'requestDefaults', ->
+        it 'should have paddingColor', ->
             expect(_config.requestDefault('paddingcolor').allowOverride).toBeTruthy()
             expect(_config.requestDefault('paddingcolor').value).toEqual('6600AA')
-        )
 
-        it('should have resize strategy', ->
+        it 'should have resize strategy', ->
             expect(_config.requestDefault('Strategy').allowOverride).toBeTruthy()
             expect(_config.requestDefault('strategY').value).toEqual('stretch')
-        )
-    )
 
-    describe('limits', ->
+    describe 'limits', ->
         [
             {
                 width: 200,
@@ -75,55 +63,40 @@ describe('Configuration', ->
                 height: 2400,
                 allowed: false
             }
-        ].forEach((expectation) ->
-            it('should' + expectation.allowed ? ' ' : ' not ' + 'allow ' + expectation.width + 'x' + expectation.height, ->
+        ].forEach (expectation) ->
+            it 'should' + expectation.allowed ? ' ' : ' not ' + 'allow ' + expectation.width + 'x' + expectation.height, ->
                 expect(
                     _config.sizeWithinLimit(
                         expectation.width,
                         expectation.height
                     )
                 ).toEqual(expectation.allowed)
-            )
-        )
-    )
-)
 
-describe('default configuration', ->
+describe 'default configuration', ->
     _config = null
 
-    beforeEach(->
-        _config = new Configuration('./spec/fixtures/minimal_config.json')
-    )
+    beforeEach ->
+        _config = new Configuration './spec/fixtures/minimal_config.json'
 
-    it('should have a connectionLimit', ->
+    it 'should have a connectionLimit', ->
         expect(_config.connectionLimit).toEqual(5)
-    )
 
-    describe('cacheControl', ->
-        it('should have an inboundTTL', ->
+    describe 'cacheControl', ->
+        it 'should have an inboundTTL', ->
             expect(_config.cacheControl.inboundTTL).toEqual(0)
-        )
 
-        it('should have an outboundTTL', ->
+        it 'should have an outboundTTL', ->
             expect(_config.cacheControl.outboundTTL).toEqual(0)
-        )
-    )
 
-    describe('requestDefaults', ->
-        it('should have paddingColor', ->
+    describe 'requestDefaults', ->
+        it 'should have paddingColor', ->
             expect(_config.requestDefault('paddingcolor').allowOverride).toBeFalsy()
             expect(_config.requestDefault('paddingcolor').value).toEqual('FFFFFF')
-        )
 
-        it('should have resize strategy', ->
+        it 'should have resize strategy', ->
             expect(_config.requestDefault('Strategy').allowOverride).toBeFalsy()
             expect(_config.requestDefault('strategY').value).toEqual('pad')
-        )
-    )
 
-
-    it('should accept any requested size', ->
+    it 'should accept any requested size', ->
         expect(_config.sizeWithinLimit(123456, 987654)).toBeTruthy()
-    )
 
-)
