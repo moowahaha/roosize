@@ -1,5 +1,5 @@
 Request = require('request').Request
-Configuration = require('config').Configuration
+Configuration = require('configuration').Configuration
 
 describe 'Request', ->
   _request = null

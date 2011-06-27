@@ -1,6 +1,6 @@
 ResizePad = require('resize/pad').ResizePad
 ImageFile = require('image_file').ImageFile
-Configuration = require('config').Configuration
+Configuration = require('configuration').Configuration
 Request = require('request').Request
 ColorConverter = require('color_converter').ColorConverter
 

@@ -1,5 +1,5 @@
 ImageFile = require('image_file').ImageFile
-Configuration = require('config').Configuration
+Configuration = require('configuration').Configuration
 fs = require 'fs'
 
 describe 'ImageFile', ->

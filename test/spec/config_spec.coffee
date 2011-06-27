@@ -1,4 +1,4 @@
-Configuration = require('config').Configuration
+Configuration = require('configuration').Configuration
 
 describe 'Configuration', ->
   _config = null

@@ -1,4 +1,4 @@
-Configuration = require('config').Configuration
+Configuration = require('configuration').Configuration
 url = require 'url'
 ResizeFactory = require('resize_factory').ResizeFactory
 
