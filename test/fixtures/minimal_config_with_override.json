@@ -1,0 +1,17 @@
+{
+  "imageSource": {
+    "type": "filesystem",
+    "path": "./test/fixtures"
+  },
+  "listenPort": 8080,
+  "requestDefaults": {
+    "paddingColor": {
+      "value": "000000",
+      "allowOverride": true
+    },
+    "strategy": {
+      "value": "pad",
+      "allowOverride": true
+    }
+  }
+}

@@ -28,6 +28,6 @@ exports.ResizeFactory = (configuration, url) ->
       message: 'Unknown strategy ' + params.strategy
     }
 
-  this.instance = new ResizeStrategies[params.strategy]
+  this.instance = new ResizeStrategies[params.strategy](params)
 
   return
