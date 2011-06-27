@@ -6,6 +6,7 @@ Configuration = require('configuration').Configuration
 ImageFile = require('image_file').ImageFile
 ResizeFactory = require('resize_factory').ResizeFactory
 Request = require('request').Request
+e = require 'exception_reporter'
 
 #TODO: make this more robust
 configFile = process.argv[2]
@@ -28,9 +29,7 @@ http.createServer((httpRequest, httpResponse) ->
       resizeFactory.instance.resize(request, imageFile.data)
     )
   catch err
-    console.log(if err.message then err.message else 'Unknown error when requesting ' + httpRequest.url)
-    httpResponse.writeHead(500, {})
-    httpResponse.end('Internal server error')
+    e.reportUnknownException(err, httpResponse)
 
 ).listen(config.listenPort)
 

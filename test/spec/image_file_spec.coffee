@@ -1,7 +1,6 @@
 ImageFile = require('image_file').ImageFile
 Configuration = require('configuration').Configuration
 FakeHttpResponse = require('fake_http_response').FakeHttpResponse
-FakeImage = require('fake_image').FakeImage
 
 gd = require 'node-gd'
 fs = require 'fs'
@@ -43,12 +42,16 @@ describe 'ImageFile', ->
     expect(_fakeHttpResponse.headers['Content-Type']).toEqual('image/jpeg')
     expect(gd.createFromJpegPtr(_fakeHttpResponse.body).width).toEqual(100)
 
-  it 'should respond with a 404 when an image is not found', ->
-    fakeResponse = new FakeHttpResponse
+describe 'Missing ImageFile', ->
+  _fakeResponse = new FakeHttpResponse
 
-    try
-      imageFile = new ImageFile(new Configuration('./test/fixtures/minimal_config.json'), fakeResponse)
+  beforeEach ->
+      imageFile = new ImageFile(new Configuration('./test/fixtures/minimal_config.json'), _fakeResponse)
       imageFile.open 'images/does_not_exist.jpg'
 
-    expect(fakeResponse.code).toEqual(404)
-    expect(fakeResponse.body).toEqual('No such file on disk images/does_not_exist.jpg')
+      waitsFor ->
+        _fakeResponse.code == 404
+
+  it 'should respond with a 404 when an image is not found', ->
+    expect(_fakeResponse.code).toEqual(404)
+    expect(_fakeResponse.body).toEqual('No such file on disk images/does_not_exist.jpg')

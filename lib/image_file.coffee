@@ -2,6 +2,7 @@ fs = require 'fs'
 path = require 'path'
 mime = require 'mime'
 gd = require 'node-gd'
+e = require 'exception_reporter'
 
 exports.ImageFile = (configuration, httpResponse) ->
   this.response = httpResponse
@@ -9,20 +10,19 @@ exports.ImageFile = (configuration, httpResponse) ->
   this.open = (filename, callback) ->
     fullPath = path.join(configuration.imageSource.path, filename)
 
-    try
-      stat = fs.statSync(fullPath)
-      this.modified = stat.mtime
-    catch err
-      if err.code is 'ENOENT'
-        httpResponse.writeHead(404, {})
-        httpResponse.end('No such file on disk ' + filename)
-
-      throw err
-
     imageFile = this
 
     fs.readFile(fullPath, "binary", (err, data) ->
-      throw err if err
+      if err
+        if err.code is 'ENOENT'
+          e.reportUserError(404, 'No such file on disk ' + filename, imageFile.response)
+        else
+          e.reportUnknownExcpetion(500, err, imageFile.response)
+
+        return
+
+      stat = fs.statSync(fullPath)
+      imageFile.modified = stat.mtime
       imageFile.mimeType = mime.lookup(fullPath)
       imageFile.type = imageFile.mimeType.split('/')[1]
       imageFile.data = gd['createFrom' + imageFile.type.charAt(0).toUpperCase() + imageFile.type.slice(1) + 'Ptr'](data)

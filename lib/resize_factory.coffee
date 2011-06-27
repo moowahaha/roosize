@@ -1,3 +1,5 @@
+e = require 'exception_reporter'
+
 ResizeStrategies =
   pad: require('resize/pad').ResizePad
   crop: require('resize/crop').ResizeCrop
@@ -13,26 +15,14 @@ exports.ResizeFactory = (configuration, request, httpResponse) ->
     return if (!params[key.toLowerCase()])
 
     if (!configuration.requestDefault(key).allowOverride)
-      error = 'You cannot specify a ' + key.toLowerCase()
-      httpResponse.writeHead(403, {})
-      httpResponse.end(error)
-
-      throw {
-        name: 'EPERM'
-        message: error
-      }
+      e.reportUserError(403, 'You cannot specify a ' + key.toLowerCase(), httpResponse)
+      return
 
     params[key.toLowerCase()] = request.params[key].toLowerCase()
 
   if !ResizeStrategies[params.strategy]
-    error = 'Unknown strategy ' + params.strategy
-    httpResponse.writeHead(406, {})
-    httpResponse.end(error)
-
-    throw {
-      name: 'EPERM'
-      message: error
-    }
+    e.reportUserError(406, 'Unknown strategy ' + params.strategy, httpResponse)
+    return
 
   this.instance = new ResizeStrategies[params.strategy](params)
 
