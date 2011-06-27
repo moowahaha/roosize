@@ -2,7 +2,6 @@ Still in development...
 
 Requires...
     - NodeJS (brew install node)
-    - Some packages. Run ./setup.sh .
 
 Probably good to have the following dependencies:
     - NVM (https://github.com/creationix/nvm/)
@@ -12,20 +11,17 @@ To run:
     - Take a look at the config files in 'test/fixtures/*.json' for inspiration.
     - Write your own config file! (e.g. ~/my_resize_config.json)
     - Run: coffee roosize.coffee ~/my_resize_config.json
-    - Request images from your browser - they should begin with /WIDTHxHEIGHT/.
+    - Request images from your browser - they should begin with /WIDTHxHEIGHT/some/image.jpg.
 
 To begin development:
     - Run "rake". This will setup the env and run all tests.
 
 TODO:
     - Skip resizing images that are already of the correct size...
-    - Totally rewrite to be safe for production use.
     - Limit request sizes.
     - Some basic time based caching.
     - Support for HTTP cache control.
     - Limit server memoray usage incase of DOS attack.
     - Introduce resize strategies (crop, stretch, pad, scale).
-    - Allow limited overrides with CGI parameters (e.g. padding color).
     - Allow configurable path parsing.
-    - Web proxying - so it can grab images from other websites (for S3, for example).
     - Get it to ignore/prevent favicon.ico requests!!
