@@ -1,3 +1,5 @@
+Still in development...
+
 Requires...
     - NodeJS (brew install node)
     - Some packages. Run ./setup.sh .
@@ -5,6 +7,12 @@ Requires...
 Probably good to have the following dependencies:
     - NVM (https://github.com/creationix/nvm/)
     - I'm using RVM to ensure isolation (https://rvm.beginrescueend.com/)
+
+To run:
+    - Take a look at the config files in 'test/fixtures/*.json' for inspiration.
+    - Write your own config file! (e.g. ~/my_resize_config.json)
+    - Run: coffee roosize.coffee ~/my_resize_config.json
+    - Request images from your browser - they should begin with /WIDTHxHEIGHT/.
 
 To begin development:
     - Run "rake". This will setup the env and run all tests.
