@@ -4,7 +4,7 @@ mime = require 'mime'
 gd = require 'node-gd'
 e = require 'exception_reporter'
 
-exports.ImageFile = (configuration, httpResponse) ->
+exports.ImageOnFilesystem = (configuration, httpResponse) ->
   this.response = httpResponse
 
   this.open = (filename, callback) ->

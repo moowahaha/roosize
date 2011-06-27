@@ -1,18 +1,18 @@
-ImageFile = require('image_file').ImageFile
+ImageOnFilesystem = require('image_on_filesystem').ImageOnFilesystem
 Configuration = require('configuration').Configuration
 FakeHttpResponse = require('fake_http_response').FakeHttpResponse
 
 gd = require 'node-gd'
 fs = require 'fs'
 
-describe 'ImageFile', ->
+describe 'ImageOnFileSystem', ->
   _imageFile = null
   _fakeHttpResponse = new FakeHttpResponse
 
   beforeEach ->
     _imageFile = null
 
-    _imageFile = new ImageFile(new Configuration('./test/fixtures/full_config.json'), _fakeHttpResponse)
+    _imageFile = new ImageOnFilesystem(new Configuration('./test/fixtures/full_config.json'), _fakeHttpResponse)
     _imageFile.open 'images/black_square.jpg', ->
       _imageFile.data
 
@@ -42,11 +42,11 @@ describe 'ImageFile', ->
     expect(_fakeHttpResponse.headers['Content-Type']).toEqual('image/jpeg')
     expect(gd.createFromJpegPtr(_fakeHttpResponse.body).width).toEqual(100)
 
-describe 'Missing ImageFile', ->
+describe 'Missing ImageOnFileSystem', ->
   _fakeResponse = new FakeHttpResponse
 
   beforeEach ->
-      imageFile = new ImageFile(new Configuration('./test/fixtures/minimal_config.json'), _fakeResponse)
+      imageFile = new ImageOnFilesystem(new Configuration('./test/fixtures/minimal_config.json'), _fakeResponse)
       imageFile.open 'images/does_not_exist.jpg'
 
       waitsFor ->

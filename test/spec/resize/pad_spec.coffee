@@ -1,5 +1,5 @@
 ResizePad = require('resize/pad').ResizePad
-ImageFile = require('image_file').ImageFile
+ImageOnFilesystem = require('image_on_filesystem').ImageOnFilesystem
 Configuration = require('configuration').Configuration
 Request = require('request').Request
 FakeHttpResponse = require('fake_http_response').FakeHttpResponse
@@ -16,7 +16,7 @@ describe 'ResizePad', ->
     )
     config = new Configuration('./test/fixtures/minimal_config_with_override.json')
     request = new Request('/100x200/images/black_square.jpg', config)
-    imageFile = new ImageFile(config, new FakeHttpResponse)
+    imageFile = new ImageOnFilesystem(config, new FakeHttpResponse)
 
     imageFile.open(request.path, ->
       _newImage = _resizer.resize(request, imageFile.data)
