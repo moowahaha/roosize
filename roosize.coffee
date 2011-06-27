@@ -3,7 +3,7 @@ require.paths.unshift([__dirname, 'lib'].join('/'))
 http = require 'http'
 
 Configuration = require('configuration').Configuration
-ImageOnFilesystem = require('image_on_filesystem').ImageOnFilesystem
+imageFileFactory = require('image_file_factory')
 ResizeFactory = require('resize_factory').ResizeFactory
 Request = require('request').Request
 e = require 'exception_reporter'
@@ -22,7 +22,9 @@ http.createServer((httpRequest, httpResponse) ->
 
   try
     request = new Request(httpRequest.url, config, httpResponse)
-    imageFile = new ImageOnFilesystem(config, httpResponse)
+    return unless request.valid
+
+    imageFile = imageFileFactory.resolve(config, httpResponse)
 
     imageFile.open(request.path, ->
       resizeFactory = new ResizeFactory(config, request, httpResponse)

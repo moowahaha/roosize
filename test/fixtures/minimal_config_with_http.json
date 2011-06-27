@@ -1,0 +1,7 @@
+{
+  "imageSource": {
+    "type": "http",
+    "path": "http://www.google.com/"
+  },
+  "listenPort": 8080
+}

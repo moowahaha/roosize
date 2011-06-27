@@ -28,12 +28,12 @@ describe 'Request', ->
   it 'should set a response for an invalid request', ->
     fakeResponse = new FakeHttpResponse
 
-    try
-      new Request(
-        '/',
-        new Configuration('./test/fixtures/minimal_config.json'),
-        fakeResponse
-      )
+    request = new Request(
+      '/',
+      new Configuration('./test/fixtures/minimal_config.json'),
+      fakeResponse
+    )
 
+    expect(request.valid).toBeFalsy()
     expect(fakeResponse.code).toEqual(406)
     expect(fakeResponse.body).toEqual('Invalid resource: /')

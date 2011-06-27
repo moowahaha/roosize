@@ -1,8 +1,10 @@
 url = require 'url'
+e = require 'exception_reporter'
 
 exports.Request = (requestString, config, httpResponse) ->
   parsedUrl = url.parse(requestString.replace(/^\//, ''), true)
   this.params = parsedUrl.query
+  this.valid = true
 
   if parsedUrl.pathname
     pathParts = parsedUrl.pathname.split('/')
@@ -13,9 +15,7 @@ exports.Request = (requestString, config, httpResponse) ->
     this.path = pathParts.join('/')
 
   if (!this.width || !this.height || !this.path)
-    error = 'Invalid resource: ' + requestString
-    httpResponse.writeHead(406, {})
-    httpResponse.end(error)
-    throw error
+    e.reportUserError(406, 'Invalid resource: ' + requestString, httpResponse)
+    this.valid = false
 
   return

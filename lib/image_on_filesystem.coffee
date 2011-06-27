@@ -6,6 +6,7 @@ e = require 'exception_reporter'
 
 exports.ImageOnFilesystem = (configuration, httpResponse) ->
   this.response = httpResponse
+  this.name = 'filesystem'
 
   this.open = (filename, callback) ->
     fullPath = path.join(configuration.imageSource.path, filename)
