@@ -1,5 +1,5 @@
 gd = require 'node-gd'
-ColorConverter = require('color_converter').ColorConverter
+colorConverter = require('color_converter')
 
 exports.ResizePad = (params) ->
 
@@ -16,8 +16,7 @@ exports.ResizePad = (params) ->
   instantiateImage: (request) ->
     newImage = gd.createTrueColor(request.width, request.height);
 
-    converter = new ColorConverter
-    colorArray = converter.fromHex(this.paddingColor)
+    colorArray = colorConverter.fromHex(this.paddingColor)
 
     newImage.fill(
       0,
