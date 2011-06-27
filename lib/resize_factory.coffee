@@ -4,28 +4,34 @@ ResizeStrategies =
   stretch: require('resize/stretch').ResizeStretch
   scale: require('resize/scale').ResizeScale
 
-exports.ResizeFactory = (configuration, url) ->
+exports.ResizeFactory = (configuration, request, httpResponse) ->
   params =
     paddingcolor: configuration.requestDefault('paddingColor').value
     strategy: configuration.requestDefault('strategy').value
 
-  Object.keys(url.query).forEach (key) ->
-    key = key.toLowerCase()
-
-    return if (!params[key])
+  Object.keys(request.params).forEach (key) ->
+    return if (!params[key.toLowerCase()])
 
     if (!configuration.requestDefault(key).allowOverride)
+      error = 'You cannot specify a ' + key.toLowerCase()
+      httpResponse.writeHead(403, {})
+      httpResponse.end(error)
+
       throw {
         name: 'EPERM'
-        message: 'You cannot specify ' + key
+        message: error
       }
 
-    params[key] = url.query[key]
+    params[key.toLowerCase()] = request.params[key].toLowerCase()
 
   if !ResizeStrategies[params.strategy]
+    error = 'Unknown strategy ' + params.strategy
+    httpResponse.writeHead(406, {})
+    httpResponse.end(error)
+
     throw {
       name: 'EPERM'
-      message: 'Unknown strategy ' + params.strategy
+      message: error
     }
 
   this.instance = new ResizeStrategies[params.strategy](params)

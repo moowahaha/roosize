@@ -17,10 +17,7 @@ describe 'ResizePad', ->
     request = new Request('/100x200/images/black_square.jpg', config)
     imageFile = new ImageFile(config)
 
-    _newImage = _resizer.resize(
-      imageData: imageFile.open(request.path)
-      request: request
-    )
+    _newImage = _resizer.resize(request, imageFile.open(request.path))
 
   it 'should have a name', ->
     expect(_resizer.name).toEqual('pad')

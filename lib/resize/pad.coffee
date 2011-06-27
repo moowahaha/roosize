@@ -31,9 +31,8 @@ exports.ResizePad = (params) ->
 
   paddingColor: params.paddingcolor.toUpperCase()
   name: 'pad'
-  resize: (params) ->
-    request = params.request
-    originalImage = params.imageData
+
+  resize: (request, originalImage) ->
     newImage = this.instantiateImage request
 
     originalRatio = originalImage.width / originalImage.height

@@ -1,4 +1,6 @@
 require.paths.unshift('./lib')
+require.paths.unshift('./test/helpers')
+
 require 'coffee-script'
 
 jasmine = require 'jasmine-node'

@@ -34,7 +34,7 @@ makeRequest = ->
   image = null
 
   request = roosizeClient.request(
-    'GET', '/800x600/bob.jpg',
+    'GET', '/800x600/images/bob.jpg',
     {'host': 'localhost'}
   )
 
