@@ -21,15 +21,12 @@ http.createServer((httpRequest, httpResponse) ->
 
   try
     request = new Request(httpRequest.url, config, httpResponse)
-
     imageFile = new ImageFile(config, httpResponse)
-    imageFile.open(request.path)
 
-    resizeFactory = new ResizeFactory(config, request, httpResponse)
-    newImage = resizeFactory.instance.resize(request, imageFile.data)
-
-    imageFile.writeToClient(newImage, httpResponse)
-
+    imageFile.open(request.path, ->
+      resizeFactory = new ResizeFactory(config, request, httpResponse)
+      resizeFactory.instance.resize(request, imageFile.data)
+    )
   catch err
     console.log(if err.message then err.message else 'Unknown error when requesting ' + httpRequest.url)
     httpResponse.writeHead(500, {})

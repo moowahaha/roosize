@@ -4,11 +4,9 @@ mime = require 'mime'
 gd = require 'node-gd'
 
 exports.ImageFile = (configuration, httpResponse) ->
-  this.writeToClient = (imageData, httpResponse) ->
-    httpResponse.writeHead(200, {'Content-Type': this.mimeType})
-    httpResponse.end(imageData[this.type + 'Ptr'](), 'binary')
+  this.response = httpResponse
 
-  this.open = (filename) ->
+  this.open = (filename, callback) ->
     fullPath = path.join(configuration.imageSource.path, filename)
 
     try
@@ -21,9 +19,18 @@ exports.ImageFile = (configuration, httpResponse) ->
 
       throw err
 
-    this.mimeType = mime.lookup(fullPath)
-    this.type = this.mimeType.split('/')[1]
+    imageFile = this
 
-    this.data = gd['createFrom' + this.type.charAt(0).toUpperCase() + this.type.slice(1) + 'Ptr'](fs.readFileSync(fullPath, "binary"))
+    fs.readFile(fullPath, "binary", (err, data) ->
+      throw err if err
+      imageFile.mimeType = mime.lookup(fullPath)
+      imageFile.type = imageFile.mimeType.split('/')[1]
+      imageFile.data = gd['createFrom' + imageFile.type.charAt(0).toUpperCase() + imageFile.type.slice(1) + 'Ptr'](data)
+
+      newImage = callback imageFile
+
+      imageFile.response.writeHead(200, {'Content-Type': imageFile.mimeType})
+      imageFile.response.end(newImage[imageFile.type + 'Ptr'](), 'binary')
+    )
 
   return

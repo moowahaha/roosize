@@ -3,6 +3,7 @@ ImageFile = require('image_file').ImageFile
 Configuration = require('configuration').Configuration
 Request = require('request').Request
 ColorConverter = require('color_converter').ColorConverter
+FakeHttpResponse = require('fake_http_response').FakeHttpResponse
 
 describe 'ResizePad', ->
   _resizer = null
@@ -10,14 +11,20 @@ describe 'ResizePad', ->
   _converter = new ColorConverter
 
   beforeEach ->
+    _newImage = null
     _resizer = new ResizePad(
       paddingcolor: 'FFFFFF'
     )
     config = new Configuration('./test/fixtures/minimal_config_with_override.json')
     request = new Request('/100x200/images/black_square.jpg', config)
-    imageFile = new ImageFile(config)
+    imageFile = new ImageFile(config, new FakeHttpResponse)
 
-    _newImage = _resizer.resize(request, imageFile.open(request.path))
+    imageFile.open(request.path, ->
+      _newImage = _resizer.resize(request, imageFile.data)
+    )
+
+    waitsFor ->
+       _newImage?
 
   it 'should have a name', ->
     expect(_resizer.name).toEqual('pad')
