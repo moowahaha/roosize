@@ -1,6 +1,7 @@
 ImageFile = require('image_file').ImageFile
 Configuration = require('configuration').Configuration
 FakeHttpResponse = require('fake_http_response').FakeHttpResponse
+gd = require 'node-gd'
 fs = require 'fs'
 
 describe 'ImageFile', ->
@@ -36,3 +37,14 @@ describe 'ImageFile', ->
 
     expect(fakeResponse.code).toEqual(404)
     expect(fakeResponse.body).toEqual('No such file on disk images/does_not_exist.jpg')
+
+  it 'should write back to the client', ->
+    fakeHttpResponse = new FakeHttpResponse
+
+    imageFile = new ImageFile(new Configuration('./test/fixtures/minimal_config.json'), fakeHttpResponse)
+    imageFile.open 'images/black_square.jpg'
+    imageFile.writeToClient(imageFile.data, fakeHttpResponse)
+
+    expect(fakeHttpResponse.code).toEqual(200)
+    expect(fakeHttpResponse.headers['Content-Type']).toEqual('image/jpeg')
+    expect(gd.createFromJpegPtr(fakeHttpResponse.body).width).toEqual(100)

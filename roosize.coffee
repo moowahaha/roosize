@@ -28,8 +28,7 @@ http.createServer((httpRequest, httpResponse) ->
     resizeFactory = new ResizeFactory(config, request, httpResponse)
     newImage = resizeFactory.instance.resize(request, imageFile.data)
 
-    httpResponse.writeHead(200, {'Content-Type': imageFile.mimeType});
-    httpResponse.end(newImage.jpegPtr(), 'binary');
+    imageFile.writeToClient(newImage, httpResponse)
 
   catch err
     console.log(if err.message then err.message else 'Unknown error when requesting ' + httpRequest.url)

@@ -4,6 +4,10 @@ mime = require 'mime'
 gd = require 'node-gd'
 
 exports.ImageFile = (configuration, httpResponse) ->
+  this.writeToClient = (imageData, httpResponse) ->
+    httpResponse.writeHead(200, {'Content-Type': this.mimeType})
+    httpResponse.end(imageData[this.type + 'Ptr'](), 'binary')
+
   this.open = (filename) ->
     fullPath = path.join(configuration.imageSource.path, filename)
 
