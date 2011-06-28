@@ -14,7 +14,7 @@ exports.ResizePad = (params) ->
     )
 
   instantiateImage: (request) ->
-    newImage = gd.createTrueColor(request.width, request.height);
+    newImage = gd.createTrueColor(request.width, request.height)
 
     colorArray = colorConverter.fromHex(this.paddingColor)
 
