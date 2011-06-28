@@ -18,11 +18,11 @@ describe 'resizeFactory', ->
       _request = new Request('/1x2/something/something?strategy=' + strategy, _config, _fakeHttpResponse)
 
     it 'should ' + strategy + ' our image', ->
-      resizer = resizeFactory.resolve(_config, _request, _fakeHttpResponse)
+      resizer = resizeFactory.instance(_config, _request, _fakeHttpResponse)
       expect(resizer.name).toEqual(strategy)
 
   it 'should use the default strategy', ->
-    resizer = resizeFactory.resolve(
+    resizer = resizeFactory.instance(
         new Configuration('./test/fixtures/minimal_config.json'),
         new Request('/1x2/something/something', _fakeHttpResponse),
         _fakeHttpResponse
@@ -32,7 +32,7 @@ describe 'resizeFactory', ->
 
   it 'should throw an exception when we try to override the strategy and we are not allowed', ->
     try
-      resizeFactory.resolve(
+      resizeFactory.instance(
         new Configuration('./test/fixtures/minimal_config.json'),
         new Request('/1x2/something/something?Strategy=stretch', _fakeHttpResponse),
         _fakeHttpResponse
@@ -43,7 +43,7 @@ describe 'resizeFactory', ->
 
   it 'should throw an exception when requesting unknown strategy', ->
     try
-      resizeFactory.resolve(
+      resizeFactory.instance(
           new Configuration('./test/fixtures/full_config.json'),
           new Request('/1x2/something/something?strategy=something', _fakeHttpResponse),
           _fakeHttpResponse

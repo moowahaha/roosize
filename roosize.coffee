@@ -24,8 +24,8 @@ http.createServer((httpRequest, httpResponse) ->
     request = new Request(httpRequest.url, config, httpResponse)
     return unless request.valid
 
-    resizer = resizeFactory.resolve(config, request, httpResponse)
-    imageFile = imageFileFactory.resolve(config, httpResponse)
+    resizer = resizeFactory.instance(config, request, httpResponse)
+    imageFile = imageFileFactory.instance(config, httpResponse)
 
     imageFile.open(request.path, ->
       resizer.resize(request, imageFile.data)

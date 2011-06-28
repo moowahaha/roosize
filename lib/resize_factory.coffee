@@ -6,7 +6,7 @@ ResizeStrategies =
   stretch: require('resize/stretch').ResizeStretch
   scale: require('resize/scale').ResizeScale
 
-exports.resolve = (configuration, request, httpResponse) ->
+exports.instance = (configuration, request, httpResponse) ->
   params =
     paddingcolor: configuration.requestDefault('paddingColor').value
     strategy: configuration.requestDefault('strategy').value
