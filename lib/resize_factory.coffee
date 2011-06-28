@@ -11,6 +11,10 @@ exports.instance = (configuration, request, httpResponse) ->
     paddingcolor: configuration.requestDefault('paddingColor').value
     strategy: configuration.requestDefault('strategy').value
 
+  if (!configuration.sizeWithinLimit(request.width, request.height))
+    e.reportUserError(403, 'Requested size not supported', httpResponse)
+    return
+
   Object.keys(request.params).forEach (key) ->
     return if (!params[key.toLowerCase()])
 

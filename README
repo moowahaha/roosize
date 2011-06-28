@@ -1,27 +1,34 @@
 Still in development...
 
+Supports:
+  - Resizing images over HTTP.
+  - GIF, PNG & JPEG formats.
+  - Images from the local file system as well as images on other host over HTTP.
+  - Request size limits (specific as well as ranges).
+  - Padding and stretching of images.
+  - Configurable or overridable padding color.
+
 Requires...
-    - NodeJS (brew install node)
+  - NodeJS (brew install node)
 
 Probably good to have the following dependencies:
-    - NVM (https://github.com/creationix/nvm/)
-    - I'm using RVM to ensure isolation (https://rvm.beginrescueend.com/)
+  - NVM (https://github.com/creationix/nvm/)
+  - I'm using RVM to ensure isolation (https://rvm.beginrescueend.com/)
 
 To run:
-    - Take a look at the config files in 'test/fixtures/*.json' for inspiration.
-    - Write your own config file! (e.g. ~/my_resize_config.json)
-    - Run: coffee roosize.coffee ~/my_resize_config.json
-    - Request images from your browser - they should begin with /WIDTHxHEIGHT/some/image.jpg.
+  - Take a look at the config files in 'test/fixtures/*.json' for inspiration.
+  - Write your own config file! (e.g. ~/my_resize_config.json)
+  - Run: coffee roosize.coffee ~/my_resize_config.json
+  - Request images from your browser - they should begin with /WIDTHxHEIGHT/some/image.jpg.
 
 To begin development:
-    - Run "rake". This will setup the env and run all tests.
+  - Run "rake". This will setup the env and run all tests.
 
 TODO:
-    - Skip resizing images that are already of the correct size...
-    - Limit request sizes.
-    - Some basic time based caching.
-    - Support for HTTP cache control.
-    - Limit server memoray usage incase of DOS attack.
-    - Introduce resize strategies (crop, scale).
-    - Allow configurable path parsing.
-    - Get it to ignore/prevent favicon.ico requests!!
+  - Skip resizing images that are already of the correct size...
+  - Some basic time based caching.
+  - Support for HTTP cache control.
+  - Limit server memoray usage incase of DOS attack.
+  - Introduce resize strategies (crop, scale).
+  - Allow configurable path parsing.
+  - Get it to ignore/prevent favicon.ico requests!!
