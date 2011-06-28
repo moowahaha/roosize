@@ -6,7 +6,7 @@ ResizeStrategies =
   stretch: require('resize/stretch').ResizeStretch
   scale: require('resize/scale').ResizeScale
 
-exports.ResizeFactory = (configuration, request, httpResponse) ->
+exports.resolve = (configuration, request, httpResponse) ->
   params =
     paddingcolor: configuration.requestDefault('paddingColor').value
     strategy: configuration.requestDefault('strategy').value
@@ -24,6 +24,4 @@ exports.ResizeFactory = (configuration, request, httpResponse) ->
     e.reportUserError(406, 'Unknown strategy ' + params.strategy, httpResponse)
     return
 
-  this.instance = new ResizeStrategies[params.strategy](params)
-
-  return
+  new ResizeStrategies[params.strategy](params)

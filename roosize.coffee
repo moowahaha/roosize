@@ -4,7 +4,7 @@ http = require 'http'
 
 Configuration = require('configuration').Configuration
 imageFileFactory = require('image_file_factory')
-ResizeFactory = require('resize_factory').ResizeFactory
+resizeFactory = require('resize_factory')
 Request = require('request').Request
 e = require 'exception_reporter'
 
@@ -24,11 +24,11 @@ http.createServer((httpRequest, httpResponse) ->
     request = new Request(httpRequest.url, config, httpResponse)
     return unless request.valid
 
+    resizer = resizeFactory.resolve(config, request, httpResponse)
     imageFile = imageFileFactory.resolve(config, httpResponse)
 
     imageFile.open(request.path, ->
-      resizeFactory = new ResizeFactory(config, request, httpResponse)
-      resizeFactory.instance.resize(request, imageFile.data)
+      resizer.resize(request, imageFile.data)
     )
   catch err
     e.reportUnknownException(err, httpResponse)

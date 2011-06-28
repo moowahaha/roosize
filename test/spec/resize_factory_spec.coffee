@@ -1,9 +1,9 @@
 Configuration = require('configuration').Configuration
 FakeHttpResponse = require('fake_http_response').FakeHttpResponse
 Request = require('request').Request
-ResizeFactory = require('resize_factory').ResizeFactory
+resizeFactory = require('resize_factory')
 
-describe 'ResizeFactory', ->
+describe 'resizeFactory', ->
   _fakeHttpResponse = null
 
   beforeEach ->
@@ -18,21 +18,21 @@ describe 'ResizeFactory', ->
       _request = new Request('/1x2/something/something?strategy=' + strategy, _config, _fakeHttpResponse)
 
     it 'should ' + strategy + ' our image', ->
-      resizeFactory = new ResizeFactory(_config, _request, _fakeHttpResponse)
-      expect(resizeFactory.instance.name).toEqual(strategy)
+      resizer = resizeFactory.resolve(_config, _request, _fakeHttpResponse)
+      expect(resizer.name).toEqual(strategy)
 
   it 'should use the default strategy', ->
-    resizeFactory = new ResizeFactory(
+    resizer = resizeFactory.resolve(
         new Configuration('./test/fixtures/minimal_config.json'),
         new Request('/1x2/something/something', _fakeHttpResponse),
         _fakeHttpResponse
     )
 
-    expect(resizeFactory.instance.name).toEqual('pad')
+    expect(resizer.name).toEqual('pad')
 
   it 'should throw an exception when we try to override the strategy and we are not allowed', ->
     try
-      new ResizeFactory(
+      resizeFactory.resolve(
         new Configuration('./test/fixtures/minimal_config.json'),
         new Request('/1x2/something/something?Strategy=stretch', _fakeHttpResponse),
         _fakeHttpResponse
@@ -43,7 +43,7 @@ describe 'ResizeFactory', ->
 
   it 'should throw an exception when requesting unknown strategy', ->
     try
-      new ResizeFactory(
+      resizeFactory.resolve(
           new Configuration('./test/fixtures/full_config.json'),
           new Request('/1x2/something/something?strategy=something', _fakeHttpResponse),
           _fakeHttpResponse
