@@ -6,7 +6,7 @@ Supports:
   - Images from the local file system as well as images on other host over HTTP.
   - Request size limits (specific as well as ranges).
   - Padding and stretching of images.
-  - Configurable or overridable padding color.
+  - Configurable or overridable padding color or resize strategy.
 
 Requires...
   - NodeJS (brew install node)
@@ -26,6 +26,7 @@ To begin development:
 
 TODO:
   - Skip resizing images that are already of the correct size...
+  - Some logging. Any logging.
   - Some basic time based caching.
   - Support for HTTP cache control.
   - Limit server memoray usage incase of DOS attack.
