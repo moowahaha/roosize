@@ -30,6 +30,6 @@ TODO:
   - Some basic time based caching.
   - Support for HTTP cache control.
   - Limit server memoray usage incase of DOS attack.
-  - Introduce resize strategies (crop, scale).
+  - Introduce resize strategies (scale).
   - Allow configurable path parsing.
   - Get it to ignore/prevent favicon.ico requests!!
