@@ -5,7 +5,7 @@ Supports:
   - GIF, PNG & JPEG formats.
   - Images from the local file system as well as images on other host over HTTP.
   - Request size limits (specific as well as ranges).
-  - Padding and stretching of images.
+  - Padding, stretching, centred cropping and scaling of images.
   - Configurable or overridable padding color or resize strategy.
 
 Requires...
@@ -30,6 +30,5 @@ TODO:
   - Some basic time based caching.
   - Support for HTTP cache control.
   - Limit server memoray usage incase of DOS attack.
-  - Introduce resize strategies (scale).
   - Allow configurable path parsing.
   - Get it to ignore/prevent favicon.ico requests!!
