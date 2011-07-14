@@ -15,4 +15,4 @@ jasmine.executeSpecsInFolder __dirname + '/spec', (runner, log) ->
     process.exit(0)
   else
     process.exit(1)
-, true, true, '_spec.coffee$'
+, true, true, process.argv[2] || '_spec.coffee$'
