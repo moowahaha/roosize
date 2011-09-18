@@ -28,6 +28,9 @@ http.createServer((httpRequest, httpResponse) ->
     imageFile = imageFileFactory.instance(config, httpResponse)
 
     imageFile.open(request.path, ->
+      if imageFile.data.width == request.width && imageFile.data.height == request.height
+        return imageFile.data
+        
       resizer.resize(request, imageFile.data)
     )
   catch err

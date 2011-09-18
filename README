@@ -29,6 +29,7 @@ TODO:
   - Some logging. Any logging.
   - Some basic time based caching.
   - Support for HTTP cache control.
-  - Limit server memoray usage incase of DOS attack.
+  - Limit server memory usage incase of DOS attack.
   - Allow configurable path parsing.
+  - Use forever.js to keep daemon alive.
   - Get it to ignore/prevent favicon.ico requests!!
