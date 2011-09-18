@@ -31,5 +31,3 @@ TODO:
   - Support for HTTP cache control.
   - Limit server memory usage incase of DOS attack.
   - Allow configurable path parsing.
-  - Use forever.js to keep daemon alive.
-  - Get it to ignore/prevent favicon.ico requests!!

@@ -5,6 +5,8 @@ require 'coffee-script'
 
 jasmine = require 'jasmine-node'
 
+GLOBAL.logger = console
+
 for key in jasmine
   do (key) ->
     global[key] = jasmine[key]

@@ -7,14 +7,24 @@ imageFileFactory = require('image_file_factory')
 resizeFactory = require('resize_factory')
 Request = require('request').Request
 e = require 'exception_reporter'
+commander = require 'commander'
 
-#TODO: make this more robust
-configFile = process.argv[2]
-unless configFile?
-  console.warn('Missing parameter: config file')
-  process.exit(-1)
+commander
+  .version('0.0.1')
+  .option('-c, --config [file]', 'Configuration file')
+  .option('-s, --syslog', 'Use syslog', false)
+  .parse(process.argv)
 
-config = new Configuration(configFile)
+GLOBAL.logger = console
+
+if commander.syslog
+  GLOBAL.logger = require('ain').set('roosize', 'daemon.roosize')
+
+if !commander.config
+  GLOBAL.logger.error 'Configuration file must be supplied.'
+  process.exit -1
+
+config = new Configuration(commander.config)
 
 http.Agent.defaultMaxSockets = config.connectionLimit
 
@@ -38,4 +48,4 @@ http.createServer((httpRequest, httpResponse) ->
 
 ).listen(config.listenPort)
 
-console.log('Listening on port ' + config.listenPort)
+GLOBAL.logger.log('Listening on port ' + config.listenPort)

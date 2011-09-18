@@ -54,7 +54,7 @@ makeRequest = ->
       process.exit(Passed is false)
 
 startServer = ->
-  RoosizeServer = spawn('coffee', ['roosize.coffee', './test/fixtures/minimal_config.json']);
+  RoosizeServer = spawn('coffee', ['roosize.coffee', '-c', './test/fixtures/minimal_config.json']);
 
   RoosizeServer.stdout.on 'data', (data) ->
     if data.toString().match(/Listening/)
