@@ -1,2 +1,2 @@
-rvm --create use 1.9.2@roosize
+rvm --create use 1.9.3@roosize
 nvm use v0.4.10
