@@ -8,6 +8,6 @@
         "daemon": "0.3.0",
         "jasmine-node": "1.0.6",
         "coffee-script": "1.1.1",
-        "commander": "0.0.5"
+        "commander": "0.6.1"
     }
 }
