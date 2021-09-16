@@ -4,7 +4,7 @@
     "dependencies": {
         "ain": "0.0.1",
         "node-gd": "0.1.6",
-        "mime": "1.2.2",
+        "mime": "1.6.0",
         "daemon": "0.3.0",
         "jasmine-node": "1.0.6",
         "coffee-script": "1.1.1",
